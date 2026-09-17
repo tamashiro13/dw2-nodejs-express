@@ -1,6 +1,7 @@
-// Importando o Express
-// const express = require("express")
+// Importando o Express com 3S6 Modules
 import express from "express";
+// Importando o arquivo de conexão do Sequelize
+import connection from './config/sequelize-config.js'
 // Iniciando o Express 
 const app = express() 
 
@@ -13,6 +14,15 @@ import ProdutoController from "./controllers/ProdutoController.js";
 app.set('view engine', 'ejs')
 // Define o uso da pasta "public" para uso de arquivos estáticos
 app.use(express.static('public'))
+
+// Realizando a conexão com o Banco de Dados
+connection.authenticate().then(()=>{
+    // Sucesso na promessa:
+    console.log("Conexão com o banco de dados realizada com sucesso!");
+    // Falha na promessa:   
+}).catch((error) => {
+    console.log(`Ocorreu um erro ao se conectar ao banco de dados. Erro: ${error}`)
+});
 
 // Configurandoo as rotas
 // Inicializando as rotas
