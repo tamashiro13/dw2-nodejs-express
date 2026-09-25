@@ -16,6 +16,8 @@ import Produto from "./models/Produto.js";
 
 
 // Configurações do Express
+// Configurando o express para permitir dados através de formulários
+app.use(express.urlencoded({ extended: false}));
 // Define o EJS como Renderizador de páginas
 app.set("view engine", "ejs");
 // Define o uso da pasta "public" para uso de arquivos estáticos
@@ -24,6 +26,8 @@ app.use(express.static("public"));
 app.use("/", PedidosController);
 app.use("/", ClientesController);
 app.use("/", ProdutosController);
+
+
 
 // REALIZANDO A CONEXÃO COM O BANCO DE DADOS
 connection.authenticate().then(() => {
